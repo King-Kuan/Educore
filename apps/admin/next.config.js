@@ -7,6 +7,7 @@ const nextConfig = {
     "@educore/email",
     "@educore/ui",
   ],
+  serverExternalPackages: ["firebase-admin"],
   images: {
     remotePatterns: [
       {
@@ -19,9 +20,6 @@ const nextConfig = {
         hostname: "**.r2.dev",
       },
     ],
-  },
-  experimental: {
-    serverComponentsExternalPackages: ["firebase-admin"],
   },
 };
 
