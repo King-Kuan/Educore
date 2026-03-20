@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-600: #1a3a2a;
+    --brand-700: #162f22;
+  }
+
+  * { -webkit-tap-highlight-color: transparent; }
+
+  body {
+    @apply text-gray-900;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Safe area for iPhone notch / home bar */
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+  .safe-top    { padding-top:    env(safe-area-inset-top); }
+}
+
+@layer components {
+  .grade-a { @apply inline-block font-mono text-xs px-2 py-0.5 rounded bg-green-50  text-green-700  border border-green-200; }
+  .grade-b { @apply inline-block font-mono text-xs px-2 py-0.5 rounded bg-blue-50   text-blue-700   border border-blue-200; }
+  .grade-c { @apply inline-block font-mono text-xs px-2 py-0.5 rounded bg-lime-50   text-lime-700   border border-lime-200; }
+  .grade-d { @apply inline-block font-mono text-xs px-2 py-0.5 rounded bg-yellow-50 text-yellow-700 border border-yellow-200; }
+  .grade-e { @apply inline-block font-mono text-xs px-2 py-0.5 rounded bg-orange-50 text-orange-700 border border-orange-200; }
+  .grade-s { @apply inline-block font-mono text-xs px-2 py-0.5 rounded bg-amber-50  text-amber-700  border border-amber-200; }
+  .grade-f { @apply inline-block font-mono text-xs px-2 py-0.5 rounded bg-red-50    text-red-700    border border-red-200; }
+}

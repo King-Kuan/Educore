@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@educore/types":    ["../../packages/types/src/index.ts"],
+      "@educore/firebase": ["../../packages/firebase/src/index.ts"],
+      "@educore/firebase/admin": ["../../packages/firebase/src/admin.ts"],
+      "@educore/utils":    ["../../packages/utils/src/index.ts"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

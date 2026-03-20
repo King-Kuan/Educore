@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@educore/types":    ["../../packages/types/src/index.ts"],
+      "@educore/firebase": ["../../packages/firebase/src/index.ts"],
+      "@educore/firebase/admin": ["../../packages/firebase/src/admin.ts"],
+      "@educore/utils":    ["../../packages/utils/src/index.ts"],
+      "@educore/utils/r2": ["../../packages/utils/src/r2.ts"],
+      "@educore/utils/imagekit": ["../../packages/utils/src/imagekit.ts"],
+      "@educore/email":    ["../../packages/email/src/index.ts"],
+      "@educore/ui":       ["../../packages/ui/src/index.ts"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
