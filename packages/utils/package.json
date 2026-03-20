@@ -1,0 +1,25 @@
+{
+  "name": "@educore/utils",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./grading": "./src/grading.ts",
+    "./ranking": "./src/ranking.ts",
+    "./studentId": "./src/studentId.ts",
+    "./billing": "./src/billing.ts",
+    "./attendance": "./src/attendance.ts",
+    "./dates": "./src/dates.ts",
+    "./r2": "./src/r2.ts",
+    "./imagekit": "./src/imagekit.ts"
+  },
+  "dependencies": {
+    "@educore/types": "*",
+    "@aws-sdk/client-s3": "^3.600.0",
+    "@aws-sdk/s3-request-presigner": "^3.600.0",
+    "imagekit": "^5.2.0",
+    "date-fns": "^4.1.0"
+  }
+}
