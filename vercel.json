@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd apps/admin && npx next build",
+  "buildCommand": "cd apps/admin && next build",
   "installCommand": "npm install",
   "outputDirectory": "apps/admin/.next",
   "framework": "nextjs"
