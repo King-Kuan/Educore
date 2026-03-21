@@ -1,6 +1,11 @@
 {
-  "buildCommand": "cd apps/admin && next build",
+  "buildCommand": "npx next build",
   "installCommand": "npm install",
   "outputDirectory": "apps/admin/.next",
   "framework": "nextjs"
 }
+```
+
+And in Vercel dashboard → **Settings** → **General** → **Root Directory** set it to:
+```
+apps/admin
