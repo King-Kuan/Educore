@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,11 +17,11 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export default function LoginPage() {
-  const router       = useRouter();
-  const params       = useSearchParams();
-  const redirect     = params.get("redirect") ?? "/";
-  const { role }     = useAuthStore();
+function LoginForm() {
+  const router   = useRouter();
+  const params   = useSearchParams();
+  const redirect = params.get("redirect") ?? "/";
+  const { role } = useAuthStore();
   const [showPass, setShowPass] = useState(false);
 
   const {
@@ -34,7 +34,6 @@ export default function LoginPage() {
     try {
       const user = await signIn(data.email, data.password);
 
-      // Set session cookie for middleware
       const token = await user.getIdToken();
       await fetch("/api/auth/session", {
         method:  "POST",
@@ -42,9 +41,8 @@ export default function LoginPage() {
         body:    JSON.stringify({ token }),
       });
 
-      // Get claims to decide where to redirect
       const { getUserClaims } = await import("@educore/firebase");
-      const claims = await getUserClaims(user);
+      const claims   = await getUserClaims(user);
       const userRole = claims?.role ?? "principal";
 
       const dest = redirect !== "/" ? redirect : getDashboard(userRole);
@@ -64,7 +62,6 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      {/* Rwanda flag stripe at top */}
       <div className="fixed top-0 left-0 right-0 h-1 flex z-50">
         <div className="flex-[2] bg-rw-green" />
         <div className="flex-1  bg-rw-yellow" />
@@ -72,7 +69,6 @@ export default function LoginPage() {
       </div>
 
       <div className="w-full max-w-sm">
-        {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-14 h-14 bg-brand-600 rounded-xl mb-4 shadow-lg">
             <BookOpen className="w-7 h-7 text-white" />
@@ -85,14 +81,12 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Card */}
         <div className="card p-8">
           <h2 className="text-lg font-semibold text-gray-800 mb-6">
             Sign in to your account
           </h2>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            {/* Email */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">
                 Email address
@@ -116,7 +110,6 @@ export default function LoginPage() {
               )}
             </div>
 
-            {/* Password */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">
                 Password
@@ -147,7 +140,6 @@ export default function LoginPage() {
               )}
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={isSubmitting}
@@ -178,6 +170,18 @@ export default function LoginPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-sm text-gray-400">Loading…</div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }
 
